@@ -14,20 +14,28 @@ feedbackRef.addEventListener('submit', onFormSubmit);
 function onFormSubmit(evt) {
   evt.preventDefault();
 
+ if(textareaREf.value == '' || inputREf.value == '') {
+    alert('Не все поля заполнены');
+    return;
+  }
     console.log(formData);
   evt.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
 }
 
-function onTextareaInput (evt) {
+function onTextareaInput(evt) {
+
  formData[evt.target.name] = evt.target.value;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
+  
 }
 
 
 function getStorageValue() {
     const savedValue = localStorage.getItem(STORAGE_KEY);
-    const parce = JSON.parse(savedValue);
+  const parce = JSON.parse(savedValue);
+  
+ 
 
     if (savedValue) {
         inputREf.value = parce.email;
