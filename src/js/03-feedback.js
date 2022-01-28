@@ -14,8 +14,8 @@ feedbackRef.addEventListener('submit', onFormSubmit);
 function onFormSubmit(evt) {
   evt.preventDefault();
 
- if(textareaREf.value == '' || inputREf.value == '') {
-    alert('Не все поля заполнены');
+ if(textareaREf.value === '' || inputREf.value === '') {
+   alert('Не все поля заполнены');
     return;
   }
     console.log(formData);
@@ -32,16 +32,18 @@ function onTextareaInput(evt) {
 
 
 function getStorageValue() {
-    const savedValue = localStorage.getItem(STORAGE_KEY);
-  const parce = JSON.parse(savedValue);
-  
- 
-
-    if (savedValue) {
-        inputREf.value = parce.email;
-        textareaREf.value = parce.message
+  const savedValue = localStorage.getItem(STORAGE_KEY);
+   
+   try {
+   const parse = JSON.parse(savedValue);
+     if (savedValue) {
+        inputREf.value = parse.email || "";
+       textareaREf.value = parse.message || "";
     }
-    
+  } catch (error) {
+console.log("Error parse", error);
+  }
+ 
 }
        
         
